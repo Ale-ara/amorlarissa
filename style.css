@@ -5,13 +5,9 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* ========================= */
-/* FUNDO GLOBAL PREMIUM */
-/* ========================= */
 body {
   color: #f5f5f5;
   scroll-behavior: smooth;
-
   background: linear-gradient(270deg, #0b0b0b, #121212, #0f0f0f);
   background-size: 600% 600%;
   animation: fundoAnimado 15s ease infinite;
@@ -23,18 +19,55 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+.tela {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
 /* ========================= */
-/* BASE */
+/* INTRO CINEMATOGRÁFICO */
 /* ========================= */
+#intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeOutIntro 2.5s ease forwards;
+  animation-delay: 1.5s;
+}
+
+.intro-text {
+  color: white;
+  font-size: 22px;
+  opacity: 0;
+  animation: fadeInText 1.5s ease forwards;
+}
+
+@keyframes fadeInText {
+  to { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes fadeOutIntro {
+  to { opacity: 0; visibility: hidden; }
+}
+
 /* ========================= */
-/* TELA INICIAL PREMIUM */
+/* TELA 1 */
 /* ========================= */
 .tela1 {
   position: relative;
   overflow: hidden;
 }
 
-/* glow de fundo */
 .tela1::before {
   content: "";
   position: absolute;
@@ -49,55 +82,56 @@ body {
 }
 
 @keyframes glowMove {
-  from {
-    transform: translate(-50%, -55%);
-  }
-  to {
-    transform: translate(-50%, -45%);
-  }
+  from { transform: translate(-50%, -55%); }
+  to { transform: translate(-50%, -45%); }
 }
 
-/* card */
 .card-inicio {
   position: relative;
   z-index: 2;
-  animation: entradaCard 1s ease forwards;
-  transform: scale(0.9);
+  background: #121212;
+  padding: 30px;
+  border-radius: 25px;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
   opacity: 0;
+  transform: scale(0.9);
+  animation: entrarHero 1.2s ease forwards;
+  animation-delay: 2.5s;
 }
 
-/* animação entrada */
-@keyframes entradaCard {
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+@keyframes entrarHero {
+  to { opacity: 1; transform: scale(1); }
 }
 
-/* efeito flutuação */
-.card-inicio {
-  animation: entradaCard 1s ease forwards, flutuar 4s ease-in-out infinite;
+.card-inicio span { color: #1db954; }
+
+.card-inicio p {
+  font-size: 14px;
+  opacity: 0.7;
+  margin: 15px 0;
 }
 
-@keyframes flutuar {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-/* botão mais vivo */
 .card-inicio button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  background: #1db954;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
   position: relative;
   overflow: hidden;
 }
 
-/* brilho passando no botão */
 .card-inicio button::after {
   content: "";
   position: absolute;
   width: 200%;
   height: 100%;
   background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
-  top: 0;
   left: -100%;
   animation: brilho 3s infinite;
 }
@@ -107,127 +141,125 @@ body {
   100% { left: 100%; }
 }
 
-/* efeito clique */
-.card-inicio button:active {
-  transform: scale(0.95);
-}
-
 /* ========================= */
-/* PLAYER */
+/* TELA 2 PLAYER */
 /* ========================= */
 .tela2 {
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(180deg, #d8892b, #8c4f10);
 }
 
-.tela2::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url("assets/foto.jpg") center/cover;
-  filter: blur(40px) brightness(0.4);
-  z-index: 0;
-}
-
-.player {
-  position: relative;
-  z-index: 2;
-  max-width: 320px;
+.player-spotify {
+  max-width: 340px;
   text-align: center;
-  animation: fadeUp 1s ease;
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+.header-player {
+  font-size: 14px;
+  margin-bottom: 15px;
 }
 
-.capa {
+.capa-grande {
   width: 100%;
-  border-radius: 20px;
+  border-radius: 12px;
   margin-bottom: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
 }
 
-.artista {
-  opacity: 0.6;
+.info-musica p {
+  opacity: 0.8;
   margin-bottom: 15px;
 }
 
 #progresso {
   width: 100%;
-  height: 4px;
-  background: #333;
-  border-radius: 10px;
-}
-
-#progresso::-webkit-slider-thumb {
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  background: #1db954;
-  border-radius: 50%;
+  height: 3px;
+  background: rgba(255,255,255,0.3);
 }
 
 .tempo {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.botoes {
+/* botões */
+.controles-player {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
 }
 
-.botoes .play {
-  background: #1db954;
-  padding: 12px;
+.controles-player button {
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controles-player .play {
+  width: 70px;
+  height: 70px;
+  background: #1db954;
+}
+
+.controles-player svg {
+  width: 22px;
 }
 
 /* ========================= */
-/* CASAL */
+/* TELA 3 */
 /* ========================= */
-.card-casal {
-  background: rgba(26,26,26,0.8);
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 20px;
-  max-width: 320px;
+.tela3 {
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+}
+
+.card-conexao {
+  max-width: 340px;
+  background: rgba(20,20,20,0.9);
+  padding: 25px;
+  border-radius: 25px;
   text-align: center;
 }
 
-.grid-tempo {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+.foto-perfil {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin: 15px 0;
 }
 
-.grid-tempo div {
-  background: #222;
-  padding: 10px;
+.card-info, .card-data {
+  background: #2a2a2a;
+  padding: 12px;
   border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.dias h1 {
+  font-size: 50px;
 }
 
 /* ========================= */
-/* MENSAGEM */
+/* TELA 4 */
 /* ========================= */
 .card-msg {
-  background: rgba(31,31,31,0.8);
-  backdrop-filter: blur(10px);
+  max-width: 320px;
+  background: #1f1f1f;
   padding: 20px;
   border-radius: 20px;
-  max-width: 320px;
   text-align: center;
 }
 
 .mensagem {
   max-height: 0;
   overflow: hidden;
-  transition: all 0.5s ease;
+  transition: 0.5s;
 }
 
 .mensagem.mostrar {
@@ -244,7 +276,7 @@ body {
 
 .barra-topo {
   position: absolute;
-  top: 15px;
+  top: 10px;
   left: 10px;
   right: 10px;
   display: flex;
@@ -255,8 +287,6 @@ body {
   flex: 1;
   height: 3px;
   background: #444;
-  border-radius: 5px;
-  overflow: hidden;
 }
 
 .barra span {
@@ -270,15 +300,18 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
+  opacity: 0;
+  transition: 0.5s;
 }
 
 .story.active {
-  display: flex;
+  opacity: 1;
+}
+
+.midia {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ========================= */
@@ -290,274 +323,16 @@ body {
 
 .final h1 {
   font-size: 40px;
-  animation: aparecer 2s ease forwards;
+  animation: aparecer 2s forwards;
 }
 
 .final p {
   opacity: 0;
-  animation: aparecer 2s ease forwards;
+  animation: aparecer 2s forwards;
   animation-delay: 1s;
 }
 
 @keyframes aparecer {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* ========================= */
-/* ANIMAÇÃO SUAVE CONTROLADA */
-/* ========================= */
-.fade {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: 0.8s ease;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ========================= */
-/* PLAYER ESTILO REAL */
-/* ========================= */
-.tela2 {
-  background: linear-gradient(180deg, #d8892b, #8c4f10);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.player-spotify {
-  width: 100%;
-  max-width: 340px;
-  text-align: center;
-  color: white;
-}
-
-.header-player {
-  font-size: 14px;
-  margin-bottom: 15px;
-  opacity: 0.9;
-}
-
-.capa-grande {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-}
-
-.info-musica h2 {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.info-musica p {
-  font-size: 14px;
-  opacity: 0.8;
-  margin-bottom: 15px;
-}
-
-/* barra */
-#progresso {
-  width: 100%;
-  height: 3px;
-  background: rgba(255,255,255,0.3);
-}
-
-#progresso::-webkit-slider-thumb {
-  background: white;
-}
-
-/* tempo */
-.tempo {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  margin-bottom: 20px;
-}
-
-/* CONTROLES ESTILO APP REAL */
-.controles-player {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-  margin-top: 10px;
-}
-
-/* botões laterais */
-.controles-player button {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(10px);
-  color: white;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-/* efeito toque */
-.controles-player button:active {
-  transform: scale(0.9);
-}
-
-/* BOTÃO PLAY (principal) */
-.controles-player .play {
-  width: 70px;
-  height: 70px;
-  background: #1db954;
-  color: white;
-  font-size: 22px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-/* efeito no play */
-.controles-player .play:active {
-  transform: scale(0.92);
-}
-
-
-/* SVG tamanho e alinhamento */
-.controles-player svg {
-  width: 22px;
-  height: 22px;
-}
-
-/* botão play maior */
-.controles-player .play svg {
-  width: 28px;
-  height: 28px;
-}
-
-/* ========================= */
-/* TELA 3 - CONEXÃO */
-/* ========================= */
-.tela3 {
-  background: radial-gradient(circle at top, #1a1a1a, #000);
-}
-
-.card-conexao {
-  width: 100%;
-  max-width: 340px;
-  background: rgba(20,20,20,0.9);
-  border-radius: 25px;
-  padding: 25px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-}
-
-/* badge topo */
-.badge {
-  display: inline-block;
-  background: #2a2a2a;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  margin-bottom: 15px;
-}
-
-/* foto */
-.foto-perfil {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 15px;
-  border: 3px solid #333;
-}
-
-/* título */
-.card-conexao h2 {
-  font-size: 22px;
-  margin-bottom: 5px;
-}
-
-.nomes {
-  font-size: 14px;
-  opacity: 0.7;
-  margin-bottom: 15px;
-}
-
-/* card info */
-.card-info {
-  background: #2a2a2a;
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-/* data */
-.card-data {
-  background: #2a2a2a;
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 13px;
-  margin-bottom: 15px;
-}
-
-.card-data strong {
-  display: block;
-  margin-top: 5px;
-  font-size: 15px;
-}
-
-/* dias destaque */
-.dias h1 {
-  font-size: 50px;
-  margin: 10px 0;
-}
-
-.dias span {
-  font-size: 14px;
-  opacity: 0.7;
-}
-
-.ranking {
-  margin-top: 10px;
-  font-size: 12px;
-  opacity: 0.6;
-}
-
-/* mídia ocupa tudo */
-.midia {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* stories com fade suave */
-.story {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.story.active {
-  opacity: 1;
-}
-
-.particula {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 50%;
-  animation: subir 6s linear infinite;
-}
-
-@keyframes subir {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-100px); opacity: 0; }
 }
