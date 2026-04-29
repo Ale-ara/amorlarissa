@@ -158,8 +158,8 @@ let storyIndex = 0;
 const stories = document.querySelectorAll(".story");
 const barras = document.querySelectorAll(".barra");
 
-let tempoStory = 4000;
-let intervaloStory;
+let intervalo;
+let tempoPadrao = 4000;
 
 function mostrarStory(index) {
   stories.forEach((story, i) => {
@@ -169,15 +169,39 @@ function mostrarStory(index) {
     span.style.transition = "none";
     span.style.width = "0%";
 
+    const video = story.querySelector("video");
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+
     if (i === index) {
       story.classList.add("active");
 
-      setTimeout(() => {
-        span.style.transition = "width 4s linear";
-        span.style.width = "100%";
-      }, 50);
+      const videoAtual = story.querySelector("video");
+
+      if (videoAtual) {
+        videoAtual.play();
+
+        videoAtual.onloadedmetadata = () => {
+          animarBarra(i, videoAtual.duration * 1000);
+          resetarTimer(videoAtual.duration * 1000);
+        };
+      } else {
+        animarBarra(i, tempoPadrao);
+        resetarTimer(tempoPadrao);
+      }
     }
   });
+}
+
+function animarBarra(index, tempo) {
+  const span = barras[index].querySelector("span");
+
+  setTimeout(() => {
+    span.style.transition = `width ${tempo}ms linear`;
+    span.style.width = "100%";
+  }, 50);
 }
 
 function proximoStory() {
@@ -185,10 +209,12 @@ function proximoStory() {
   mostrarStory(storyIndex);
 }
 
-function iniciarStories() {
-  intervaloStory = setInterval(proximoStory, tempoStory);
+function resetarTimer(tempo) {
+  clearTimeout(intervalo);
+  intervalo = setTimeout(proximoStory, tempo);
 }
 
+// clique
 document.querySelector(".tela5").addEventListener("click", (e) => {
   vibrar();
 
@@ -204,13 +230,9 @@ document.querySelector(".tela5").addEventListener("click", (e) => {
   if (storyIndex < 0) storyIndex = stories.length - 1;
 
   mostrarStory(storyIndex);
-  clearInterval(intervaloStory);
-  iniciarStories();
 });
 
 mostrarStory(0);
-iniciarStories();
-
 
 // =========================
 // ANIMAÇÃO SUAVE
@@ -236,3 +258,19 @@ function vibrar() {
     navigator.vibrate(10);
   }
 }
+
+function criarParticulas() {
+  const tela = document.querySelector(".tela1");
+
+  for (let i = 0; i < 20; i++) {
+    let p = document.createElement("div");
+    p.className = "particula";
+
+    p.style.left = Math.random() * 100 + "%";
+    p.style.top = Math.random() * 100 + "%";
+
+    tela.appendChild(p);
+  }
+}
+
+criarParticulas();
