@@ -28,35 +28,37 @@
   </section>
 
   <!-- TELA 2 -->
-  <section class="tela tela2">
-    <div class="player">
+ <section class="tela tela2">
+  <div class="player-spotify">
 
-      <div class="top-bar">
-        <span>Eu te amo mais que tudo ❤️</span>
-      </div>
-
-      <img src="assets/foto.jpg" class="capa">
-
-      <h2>Nosso Momento</h2>
-      <p class="artista">Alessandro & Larissa</p>
-
-      <audio id="musica" src="assets/musica.mp3"></audio>
-
-      <input type="range" id="progresso" value="0">
-
-      <div class="tempo">
-        <span id="inicio">0:00</span>
-        <span id="fim">0:00</span>
-      </div>
-
-      <div class="botoes">
-        <button onclick="reiniciarMusica()">⏮</button>
-        <button class="play" onclick="toggleMusica()">▶</button>
-        <button onclick="reiniciarMusica()">🔁</button>
-      </div>
-
+    <div class="header-player">
+      <span>Eu te amo mais que tudo! ❤️</span>
     </div>
-  </section>
+
+    <img src="assets/foto.jpg" class="capa-grande">
+
+    <div class="info-musica">
+      <h2>Sonha Comigo</h2>
+      <p>Zé Neto e Cristiano</p>
+    </div>
+
+    <audio id="musica" src="assets/musica.mp3"></audio>
+
+    <input type="range" id="progresso" value="0">
+
+    <div class="tempo">
+      <span id="inicio">0:00</span>
+      <span id="fim">0:00</span>
+    </div>
+
+    <div class="controles-player">
+      <button>⏮</button>
+      <button class="play" onclick="toggleMusica()">▶</button>
+      <button>⏭</button>
+    </div>
+
+  </div>
+</section>
 
   <!-- TELA 3 -->
   <section class="tela tela3">
