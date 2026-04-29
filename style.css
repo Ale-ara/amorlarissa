@@ -323,10 +323,38 @@ body {
   opacity: 1;
 }
 
-.midia {
+/* container */
+.story {
+  position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* fundo desfocado */
+.story::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(40px) scale(1.2);
+  z-index: 1;
+}
+
+/* imagem principal */
+.midia {
+  position: relative;
+  z-index: 2;
+
+  max-width: 90%;
+  max-height: 90%;
+
+  object-fit: contain;
+  border-radius: 12px;
 }
 
 /* ========================= */
