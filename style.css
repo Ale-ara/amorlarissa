@@ -62,37 +62,31 @@ body {
 /* TELA 1 */
 /* ========================= */
 .tela1 {
+  background: radial-gradient(circle at top, #1a1a1a, #000);
   position: relative;
   overflow: hidden;
 }
 
-.card-inicio {
-  background: #121212;
-  padding: 30px;
-  border-radius: 25px;
-  max-width: 340px;
-  text-align: center;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-}
-
-.card-inicio span {
-  color: #1db954;
-}
-
-.card-inicio p {
-  font-size: 14px;
-  opacity: 0.7;
-  margin: 15px 0;
-}
-
-.card-inicio button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 30px;
+/* brilho suave animado */
+.tela1::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
   background: #1db954;
-  color: black;
-  font-weight: bold;
+  filter: blur(120px);
+  opacity: 0.15;
+
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  animation: glow 6s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%,100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.2); }
 }
 
 /* ========================= */
