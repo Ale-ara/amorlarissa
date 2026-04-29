@@ -336,3 +336,46 @@ body {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* BOTÃO MENSAGEM */
+.btn-mensagem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  width: 100%;
+  padding: 14px 16px;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+
+  color: #fff;
+  font-size: 14px;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-mensagem svg {
+  width: 18px;
+  transition: 0.3s;
+}
+
+/* hover */
+.btn-mensagem:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* clique */
+.btn-mensagem:active {
+  transform: scale(0.97);
+}
+
+/* quando aberto */
+.btn-mensagem.ativo svg {
+  transform: rotate(180deg);
+}
