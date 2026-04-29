@@ -144,6 +144,28 @@ body {
   }
 }
 
+.titulo span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: subir 0.6s ease forwards;
+}
+
+.titulo span:nth-child(1) { animation-delay: 0.3s; }
+.titulo span:nth-child(2) { animation-delay: 0.8s; }
+.titulo span:nth-child(3) { animation-delay: 1.3s; }
+
+@keyframes subir {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.destaque {
+  color: #1db954;
+}
+
 /* ========================= */
 /* PLAYER */
 /* ========================= */
