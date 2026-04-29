@@ -327,3 +327,7 @@ body {
     font-size: 60px;
   }
 }
+
+.story::before {
+  display: none;
+}
