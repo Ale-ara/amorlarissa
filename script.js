@@ -1,5 +1,5 @@
 // =========================
-// SCROLL INICIAL
+// SCROLL
 // =========================
 function scrollParaMusica() {
   document.querySelector(".tela2").scrollIntoView({
@@ -9,20 +9,13 @@ function scrollParaMusica() {
 
 
 // =========================
-// PLAYER DE MÚSICA
+// PLAYER
 // =========================
 const musica = document.getElementById("musica");
 const progresso = document.getElementById("progresso");
-const btnPlay = document.querySelector(".play");
+const iconPlay = document.getElementById("iconPlay");
 
 let tocando = false;
-
-function toggleMusica() {
-  vibrar();
-
-  if (tocando) {
-    musica.pause();
-    const iconPlay = document.getElementById("iconPlay");
 
 function toggleMusica() {
   vibrar();
@@ -37,28 +30,28 @@ function toggleMusica() {
 
   tocando = !tocando;
 }
-  } else {
-    musica.play();
-    btnPlay.innerText = "⏸";
-  }
-  tocando = !tocando;
-}
 
 function reiniciarMusica() {
   vibrar();
   musica.currentTime = 0;
   musica.play();
-  btnPlay.innerText = "⏸";
+  iconPlay.innerHTML = '<path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
   tocando = true;
 }
 
-// autoplay quando entrar na tela
+
+// autoplay suave
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      musica.play();
-      btnPlay.innerText = "⏸";
+    if (entry.isIntersecting && !tocando) {
+      musica.play().catch(() => {});
       tocando = true;
+    }
+
+    if (!entry.isIntersecting && tocando) {
+      musica.pause();
+      iconPlay.innerHTML = '<path fill="currentColor" d="M8 5v14l11-7z"/>';
+      tocando = false;
     }
   });
 }, { threshold: 0.6 });
@@ -88,29 +81,13 @@ function formatarTempo(segundos) {
 
 
 // =========================
-// CONTADOR
+// CONTADOR PADRÃO
 // =========================
 const dataInicio = new Date("2025-05-27T00:00:00");
 
 function atualizarContador() {
   const agora = new Date();
   let diff = agora - dataInicio;
-
-  let segundos = Math.floor(diff / 1000) % 60;
-  let minutos = Math.floor(diff / (1000 * 60)) % 60;
-  let horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
-  let diasTotal = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-  let anos = Math.floor(diasTotal / 365);
-  let meses = Math.floor((diasTotal % 365) / 30);
-  let dias = (diasTotal % 365) % 30;
-
-  document.getElementById("anos").innerText = anos;
-  document.getElementById("meses").innerText = meses;
-  document.getElementById("dias").innerText = dias;
-  document.getElementById("horas").innerText = horas;
-  document.getElementById("minutos").innerText = minutos;
-  document.getElementById("segundos").innerText = segundos;
 
   document.getElementById("horasJuntos").innerText =
     Math.floor(diff / (1000 * 60 * 60)).toLocaleString();
@@ -121,50 +98,95 @@ atualizarContador();
 
 
 // =========================
+// 🔥 ANIMAÇÃO DA CONEXÃO
+// =========================
+function animarNumero(elemento, valorFinal) {
+  let atual = 0;
+  let incremento = Math.ceil(valorFinal / 60);
+
+  const intervalo = setInterval(() => {
+    atual += incremento;
+
+    if (atual >= valorFinal) {
+      atual = valorFinal;
+      clearInterval(intervalo);
+    }
+
+    elemento.innerText = atual;
+  }, 20);
+}
+
+function iniciarAnimacaoConexao() {
+  const inicio = new Date("2025-05-27T00:00:00");
+  const agora = new Date();
+
+  const dias = Math.floor((agora - inicio) / (1000 * 60 * 60 * 24));
+
+  const el = document.getElementById("diasTotal");
+
+  if (el && !el.classList.contains("animado")) {
+    el.classList.add("animado");
+    animarNumero(el, dias);
+  }
+}
+
+// ativa quando entra na tela 3
+const observerConexao = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      iniciarAnimacaoConexao();
+    }
+  });
+}, { threshold: 0.5 });
+
+observerConexao.observe(document.querySelector(".tela3"));
+
+
+// =========================
 // MENSAGEM
 // =========================
 function toggleMensagem() {
   vibrar();
-  const msg = document.getElementById("mensagem");
-
-  msg.classList.toggle("mostrar");
+  document.getElementById("mensagem").classList.toggle("mostrar");
 }
 
 
 // =========================
-// STORIES SUAVE + AUTO
+// STORIES
 // =========================
 let storyIndex = 0;
 const stories = document.querySelectorAll(".story");
 const barras = document.querySelectorAll(".barra");
 
-let tempoStory = 4000; // 4s
+let tempoStory = 4000;
 let intervaloStory;
 
 function mostrarStory(index) {
   stories.forEach((story, i) => {
     story.classList.remove("active");
 
+    const span = barras[i].querySelector("span");
+    span.style.transition = "none";
+    span.style.width = "0%";
+
     if (i === index) {
       story.classList.add("active");
-      animarBarra(i);
+
+      setTimeout(() => {
+        span.style.transition = "width 4s linear";
+        span.style.width = "100%";
+      }, 50);
     }
   });
 }
 
 function proximoStory() {
-  storyIndex++;
-  if (storyIndex >= stories.length) storyIndex = 0;
+  storyIndex = (storyIndex + 1) % stories.length;
   mostrarStory(storyIndex);
 }
 
 function iniciarStories() {
   intervaloStory = setInterval(proximoStory, tempoStory);
-}
-
-function resetarStories() {
-  clearInterval(intervaloStory);
-  iniciarStories();
 }
 
 document.querySelector(".tela5").addEventListener("click", (e) => {
@@ -182,7 +204,8 @@ document.querySelector(".tela5").addEventListener("click", (e) => {
   if (storyIndex < 0) storyIndex = stories.length - 1;
 
   mostrarStory(storyIndex);
-  resetarStories();
+  clearInterval(intervaloStory);
+  iniciarStories();
 });
 
 mostrarStory(0);
@@ -190,9 +213,9 @@ iniciarStories();
 
 
 // =========================
-// ANIMAÇÃO SUAVE AO ENTRAR
+// ANIMAÇÃO SUAVE
 // =========================
-const elementos = document.querySelectorAll(".tela div");
+const elementos = document.querySelectorAll(".card-inicio, .player-spotify, .card-conexao, .card-msg, .final");
 
 const animObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -206,35 +229,10 @@ elementos.forEach(el => animObserver.observe(el));
 
 
 // =========================
-// VIBRAÇÃO (IPHONE)
+// VIBRAÇÃO
 // =========================
 function vibrar() {
   if (navigator.vibrate) {
     navigator.vibrate(10);
   }
 }
-
-// animação da barra tipo instagram
-function animarBarra(index) {
-  const barra = barras[index].querySelector("span");
-
-  barra.style.width = "0%";
-
-  setTimeout(() => {
-    barra.style.transition = "width 4s linear";
-    barra.style.width = "100%";
-  }, 50);
-}
-
-function atualizarDiasTotal() {
-  const inicio = new Date("2025-05-27T00:00:00");
-  const agora = new Date();
-
-  const diff = agora - inicio;
-  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-  document.getElementById("diasTotal").innerText = dias;
-}
-
-setInterval(atualizarDiasTotal, 1000);
-atualizarDiasTotal();
