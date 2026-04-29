@@ -225,3 +225,16 @@ function animarBarra(index) {
     barra.style.width = "100%";
   }, 50);
 }
+
+function atualizarDiasTotal() {
+  const inicio = new Date("2025-05-27T00:00:00");
+  const agora = new Date();
+
+  const diff = agora - inicio;
+  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+  document.getElementById("diasTotal").innerText = dias;
+}
+
+setInterval(atualizarDiasTotal, 1000);
+atualizarDiasTotal();
