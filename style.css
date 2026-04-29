@@ -26,57 +26,90 @@ body {
 /* ========================= */
 /* BASE */
 /* ========================= */
-.tela {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+/* ========================= */
+/* TELA INICIAL PREMIUM */
+/* ========================= */
+.tela1 {
+  position: relative;
+  overflow: hidden;
 }
 
-/* ========================= */
-/* INTRO */
-/* ========================= */
+/* glow de fundo */
+.tela1::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(29,185,84,0.25), transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(80px);
+  animation: glowMove 6s infinite alternate;
+}
+
+@keyframes glowMove {
+  from {
+    transform: translate(-50%, -55%);
+  }
+  to {
+    transform: translate(-50%, -45%);
+  }
+}
+
+/* card */
 .card-inicio {
-  background: #121212;
-  padding: 30px 25px;
-  border-radius: 25px;
-  width: 100%;
-  max-width: 320px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-  text-align: center;
-  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 2;
+  animation: entradaCard 1s ease forwards;
+  transform: scale(0.9);
+  opacity: 0;
 }
 
-.card-inicio h1 {
-  font-size: 22px;
-  margin-bottom: 15px;
+/* animação entrada */
+@keyframes entradaCard {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-.card-inicio span {
-  color: #1db954;
+/* efeito flutuação */
+.card-inicio {
+  animation: entradaCard 1s ease forwards, flutuar 4s ease-in-out infinite;
 }
 
-.card-inicio p {
-  font-size: 14px;
-  opacity: 0.7;
-  margin-bottom: 25px;
+@keyframes flutuar {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
+/* botão mais vivo */
 .card-inicio button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 30px;
-  background: #1db954;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
 }
 
-.card-inicio button:hover {
-  background: #1ed760;
+/* brilho passando no botão */
+.card-inicio button::after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  top: 0;
+  left: -100%;
+  animation: brilho 3s infinite;
+}
+
+@keyframes brilho {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* efeito clique */
+.card-inicio button:active {
+  transform: scale(0.95);
 }
 
 /* ========================= */
@@ -493,4 +526,38 @@ body {
   margin-top: 10px;
   font-size: 12px;
   opacity: 0.6;
+}
+
+/* mídia ocupa tudo */
+.midia {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* stories com fade suave */
+.story {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.story.active {
+  opacity: 1;
+}
+
+.particula {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  animation: subir 6s linear infinite;
+}
+
+@keyframes subir {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100px); opacity: 0; }
 }
