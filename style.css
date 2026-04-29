@@ -251,15 +251,30 @@ body {
 .card-msg {
   max-width: 320px;
   background: #1f1f1f;
-  padding: 20px;
+  padding: 28px 22px; /* mais espaço interno */
   border-radius: 20px;
   text-align: center;
+}
+
+.card-msg h2 {
+  margin-bottom: 20px;
 }
 
 .mensagem {
   max-height: 0;
   overflow: hidden;
   transition: 0.5s;
+}
+
+.mensagem p br {
+  display: block;
+  margin-bottom: 12px;
+  content: "";
+}
+
+.mensagem p {
+  line-height: 1.6;
+  font-size: 15px;
 }
 
 .mensagem.mostrar {
