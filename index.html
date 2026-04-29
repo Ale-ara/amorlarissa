@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Larissa ❤️</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- TELA 1 -->
+  <section class="tela tela1">
+    <div class="card-inicio">
+      <h1>
+        Larissa,<br>
+        seu namorado separou um <span>presente especial</span>!
+      </h1>
+
+      <p>
+        Um momento único feito com carinho<br>
+        para celebrar a nossa história ❤️
+      </p>
+
+      <button onclick="scrollParaMusica()">Ver Presente</button>
+    </div>
+  </section>
+
+  <!-- TELA 2 -->
+  <section class="tela tela2">
+    <div class="player">
+
+      <div class="top-bar">
+        <span>Eu te amo mais que tudo ❤️</span>
+      </div>
+
+      <img src="assets/foto.jpg" class="capa">
+
+      <h2>Nosso Momento</h2>
+      <p class="artista">Alessandro & Larissa</p>
+
+      <audio id="musica" src="assets/musica.mp3"></audio>
+
+      <input type="range" id="progresso" value="0">
+
+      <div class="tempo">
+        <span id="inicio">0:00</span>
+        <span id="fim">0:00</span>
+      </div>
+
+      <div class="botoes">
+        <button onclick="reiniciarMusica()">⏮</button>
+        <button class="play" onclick="toggleMusica()">▶</button>
+        <button onclick="reiniciarMusica()">🔁</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TELA 3 -->
+  <section class="tela tela3">
+    <div class="card-casal">
+
+      <img src="assets/foto2.jpg" class="foto-casal">
+
+      <h2>Alessandro & Larissa</h2>
+      <p>Juntos desde 27 de maio de 2025</p>
+
+      <div class="grid-tempo">
+        <div><span id="anos">0</span><small>Anos</small></div>
+        <div><span id="meses">0</span><small>Meses</small></div>
+        <div><span id="dias">0</span><small>Dias</small></div>
+        <div><span id="horas">0</span><small>Horas</small></div>
+        <div><span id="minutos">0</span><small>Minutos</small></div>
+        <div><span id="segundos">0</span><small>Segundos</small></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TELA 4 -->
+  <section class="tela tela4">
+    <div class="card-msg">
+
+      <h2>Mensagem especial 💌</h2>
+
+      <button onclick="toggleMensagem()">Ver mensagem</button>
+
+      <div id="mensagem" class="mensagem">
+        <p>
+          Desde que você entrou na minha vida, tudo mudou.<br><br>
+          Cada momento ao seu lado é especial, cada sorriso seu ilumina meu dia.<br><br>
+          Eu posso não ser perfeito, mas todos os dias eu tento ser melhor por você.<br><br>
+          Obrigado por existir, por estar comigo e por fazer minha vida ter mais sentido.<br><br>
+          Eu te amo mais do que qualquer palavra pode explicar ❤️
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TELA 5 -->
+  <section class="tela tela5">
+
+    <div class="barra-topo">
+      <div class="barra"><span></span></div>
+      <div class="barra"><span></span></div>
+      <div class="barra"><span></span></div>
+    </div>
+
+    <div class="stories">
+
+      <div class="story active">
+        <h2>Horas juntos ⏳</h2>
+        <p id="horasJuntos"></p>
+      </div>
+
+      <div class="story">
+        <h2>Nosso início 💕</h2>
+        <p>27/05/2025</p>
+      </div>
+
+      <div class="story">
+        <h2>Você é tudo pra mim ❤️</h2>
+        <p>Minha melhor escolha</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- TELA FINAL -->
+  <section class="tela tela-final">
+    <div class="final">
+      <h1>Eu te amo ❤️</h1>
+      <p>Para sempre nós.</p>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
