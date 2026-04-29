@@ -334,3 +334,16 @@ function criarParticulas() {
 }
 
 criarParticulas();
+
+function toggleMensagem() {
+  const msg = document.getElementById("mensagem");
+  const seta = document.querySelector(".seta");
+
+  msg.classList.toggle("ativa");
+
+  if (msg.classList.contains("ativa")) {
+    seta.style.transform = "rotate(180deg)";
+  } else {
+    seta.style.transform = "rotate(0deg)";
+  }
+}
