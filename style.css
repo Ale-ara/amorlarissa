@@ -224,20 +224,65 @@ body {
 /* TELA 4 */
 /* ========================= */
 .card-msg {
-  max-width: 320px;
-  background: #1f1f1f;
-  padding: 28px;
-  border-radius: 20px;
+  max-width: 340px;
+  margin: auto;
+  padding: 25px 20px;
+
+  background: rgba(20,20,20,0.9);
+  border-radius: 25px;
+
+  text-align: center;
 }
 
+/* BOTÃO */
+.btn-msg {
+  width: 100%;
+  margin-top: 15px;
+
+  background: rgba(255,255,255,0.08);
+  border: none;
+
+  padding: 14px 16px;
+  border-radius: 14px;
+
+  color: white;
+  font-size: 15px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-msg:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.seta {
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+/* MENSAGEM */
 .mensagem {
   max-height: 0;
   overflow: hidden;
-  transition: 0.5s;
+
+  transition: max-height 0.6s ease;
+  margin-top: 10px;
 }
 
-.mensagem.mostrar {
-  max-height: 500px;
+.mensagem.ativa {
+  max-height: 500px; /* suporta texto grande */
+}
+
+.mensagem p {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-top: 10px;
 }
 
 /* ========================= */
