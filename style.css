@@ -427,3 +427,37 @@ body {
   touch-action: manipulation;
   user-select: none;
 }
+
+.story {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  background-size: cover;
+  background-position: center;
+}
+
+.story::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(40px) scale(1.2);
+  z-index: 1;
+}
+
+.midia {
+  position: relative;
+  z-index: 2;
+
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+
+  border-radius: 12px;
+}
