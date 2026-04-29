@@ -403,3 +403,94 @@ body {
   width: 28px;
   height: 28px;
 }
+
+/* ========================= */
+/* TELA 3 - CONEXÃO */
+/* ========================= */
+.tela3 {
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+}
+
+.card-conexao {
+  width: 100%;
+  max-width: 340px;
+  background: rgba(20,20,20,0.9);
+  border-radius: 25px;
+  padding: 25px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* badge topo */
+.badge {
+  display: inline-block;
+  background: #2a2a2a;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+/* foto */
+.foto-perfil {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #333;
+}
+
+/* título */
+.card-conexao h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.nomes {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 15px;
+}
+
+/* card info */
+.card-info {
+  background: #2a2a2a;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+/* data */
+.card-data {
+  background: #2a2a2a;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.card-data strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 15px;
+}
+
+/* dias destaque */
+.dias h1 {
+  font-size: 50px;
+  margin: 10px 0;
+}
+
+.dias span {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.ranking {
+  margin-top: 10px;
+  font-size: 12px;
+  opacity: 0.6;
+}
