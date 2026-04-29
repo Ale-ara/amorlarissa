@@ -154,13 +154,22 @@ function toggleMensagem() {
 // =========================
 // STORIES COMPLETO
 // =========================
+// =========================
+// STORIES NÍVEL INSTAGRAM
+// =========================
 let storyIndex = 0;
 const stories = document.querySelectorAll(".story");
 const barras = document.querySelectorAll(".barra");
 
 let intervalo;
 let tempoPadrao = 4000;
+let pausado = false;
 
+let startX = 0;
+let endX = 0;
+
+
+// MOSTRAR STORY
 function mostrarStory(index) {
   stories.forEach((story, i) => {
     story.classList.remove("active");
@@ -183,57 +192,108 @@ function mostrarStory(index) {
       if (videoAtual) {
         videoAtual.muted = true;
         videoAtual.playsInline = true;
+
         videoAtual.play();
 
         videoAtual.onloadedmetadata = () => {
-          animarBarra(i, videoAtual.duration * 1000);
-          resetarTimer(videoAtual.duration * 1000);
+          iniciarTempo(videoAtual.duration * 1000, i);
         };
+
       } else {
-        animarBarra(i, tempoPadrao);
-        resetarTimer(tempoPadrao);
+        iniciarTempo(tempoPadrao, i);
       }
     }
   });
 }
 
-function animarBarra(index, tempo) {
+
+// TEMPO + BARRA
+function iniciarTempo(tempo, index) {
+  clearTimeout(intervalo);
+
   const span = barras[index].querySelector("span");
 
   setTimeout(() => {
     span.style.transition = `width ${tempo}ms linear`;
     span.style.width = "100%";
   }, 50);
+
+  intervalo = setTimeout(() => {
+    if (!pausado) proximoStory();
+  }, tempo);
 }
 
+
+// AVANÇAR
 function proximoStory() {
   storyIndex = (storyIndex + 1) % stories.length;
   mostrarStory(storyIndex);
 }
 
-function resetarTimer(tempo) {
-  clearTimeout(intervalo);
-  intervalo = setTimeout(proximoStory, tempo);
+// VOLTAR
+function voltarStory() {
+  storyIndex = (storyIndex - 1 + stories.length) % stories.length;
+  mostrarStory(storyIndex);
 }
 
+
+// CLIQUE (lado da tela)
 document.querySelector(".tela5").addEventListener("click", (e) => {
+  if (pausado) return;
+
   vibrar();
 
-  const largura = window.innerWidth;
-
-  if (e.clientX > largura / 2) {
-    storyIndex++;
+  if (e.clientX > window.innerWidth / 2) {
+    proximoStory();
   } else {
-    storyIndex--;
+    voltarStory();
   }
-
-  if (storyIndex >= stories.length) storyIndex = 0;
-  if (storyIndex < 0) storyIndex = stories.length - 1;
-
-  mostrarStory(storyIndex);
-  resetarTimer(tempoPadrao);
 });
 
+
+// SEGURAR = PAUSAR
+document.querySelector(".tela5").addEventListener("touchstart", (e) => {
+  pausado = true;
+
+  clearTimeout(intervalo);
+
+  const video = stories[storyIndex].querySelector("video");
+  if (video) video.pause();
+});
+
+
+// SOLTAR = CONTINUAR
+document.querySelector(".tela5").addEventListener("touchend", (e) => {
+  pausado = false;
+
+  const video = stories[storyIndex].querySelector("video");
+  if (video) video.play();
+
+  iniciarTempo(tempoPadrao, storyIndex);
+});
+
+
+// SWIPE (ARRASTAR)
+document.querySelector(".tela5").addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+document.querySelector(".tela5").addEventListener("touchend", (e) => {
+  endX = e.changedTouches[0].clientX;
+
+  let diff = startX - endX;
+
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) {
+      proximoStory();
+    } else {
+      voltarStory();
+    }
+  }
+});
+
+
+// INICIAR
 mostrarStory(0);
 
 
