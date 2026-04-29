@@ -345,25 +345,61 @@ body {
   margin-bottom: 20px;
 }
 
-/* controles */
+/* CONTROLES ESTILO APP REAL */
 .controles-player {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 25px;
+  margin-top: 10px;
 }
 
+/* botões laterais */
 .controles-player button {
-  background: none;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
   border: none;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
   color: white;
-  font-size: 20px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
+/* efeito toque */
+.controles-player button:active {
+  transform: scale(0.9);
+}
+
+/* BOTÃO PLAY (principal) */
 .controles-player .play {
-  background: white;
-  color: black;
-  padding: 15px;
-  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  background: #1db954;
+  color: white;
   font-size: 22px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* efeito no play */
+.controles-player .play:active {
+  transform: scale(0.92);
+}
+
+
+/* SVG tamanho e alinhamento */
+.controles-player svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* botão play maior */
+.controles-player .play svg {
+  width: 28px;
+  height: 28px;
 }
