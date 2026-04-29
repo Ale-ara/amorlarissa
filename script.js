@@ -22,7 +22,21 @@ function toggleMusica() {
 
   if (tocando) {
     musica.pause();
-    btnPlay.innerText = "▶";
+    const iconPlay = document.getElementById("iconPlay");
+
+function toggleMusica() {
+  vibrar();
+
+  if (tocando) {
+    musica.pause();
+    iconPlay.innerHTML = '<path fill="currentColor" d="M8 5v14l11-7z"/>';
+  } else {
+    musica.play();
+    iconPlay.innerHTML = '<path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
+  }
+
+  tocando = !tocando;
+}
   } else {
     musica.play();
     btnPlay.innerText = "⏸";
