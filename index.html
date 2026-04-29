@@ -51,11 +51,30 @@
       <span id="fim">0:00</span>
     </div>
 
-    <div class="controles-player">
-      <button>⏮</button>
-      <button class="play" onclick="toggleMusica()">▶</button>
-      <button>⏭</button>
-    </div>
+   <div class="controles-player">
+
+  <!-- VOLTAR -->
+  <button onclick="reiniciarMusica()">
+    <svg viewBox="0 0 24 24">
+      <path fill="currentColor" d="M11 18V6l-8.5 6L11 18zm1 0h2V6h-2v12z"/>
+    </svg>
+  </button>
+
+  <!-- PLAY / PAUSE -->
+  <button class="play" onclick="toggleMusica()" id="btnPlay">
+    <svg id="iconPlay" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M8 5v14l11-7z"/>
+    </svg>
+  </button>
+
+  <!-- REPEAT -->
+  <button onclick="reiniciarMusica()">
+    <svg viewBox="0 0 24 24">
+      <path fill="currentColor" d="M17 1l4 4-4 4V6H7v4H5V4h12V1zM7 23l-4-4 4-4v3h10v-4h2v6H7v3z"/>
+    </svg>
+  </button>
+
+</div>
 
   </div>
 </section>
