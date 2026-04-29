@@ -1,10 +1,18 @@
 // =========================
-// SCROLL
+// SCROLL COM TRANSIÇÃO
 // =========================
 function scrollParaMusica() {
-  document.querySelector(".tela2").scrollIntoView({
-    behavior: "smooth"
-  });
+  const tela = document.querySelector(".tela1");
+
+  tela.style.transition = "0.6s";
+  tela.style.opacity = "0";
+  tela.style.transform = "scale(1.05)";
+
+  setTimeout(() => {
+    document.querySelector(".tela2").scrollIntoView({
+      behavior: "smooth"
+    });
+  }, 400);
 }
 
 
@@ -17,6 +25,20 @@ const iconPlay = document.getElementById("iconPlay");
 
 let tocando = false;
 
+function fadeInMusica() {
+  musica.volume = 0;
+  let vol = 0;
+
+  const intervalo = setInterval(() => {
+    vol += 0.05;
+    if (vol >= 1) {
+      vol = 1;
+      clearInterval(intervalo);
+    }
+    musica.volume = vol;
+  }, 100);
+}
+
 function toggleMusica() {
   vibrar();
 
@@ -25,6 +47,7 @@ function toggleMusica() {
     iconPlay.innerHTML = '<path fill="currentColor" d="M8 5v14l11-7z"/>';
   } else {
     musica.play();
+    fadeInMusica();
     iconPlay.innerHTML = '<path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
   }
 
@@ -35,17 +58,16 @@ function reiniciarMusica() {
   vibrar();
   musica.currentTime = 0;
   musica.play();
-  iconPlay.innerHTML = '<path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
+  fadeInMusica();
   tocando = true;
 }
 
 
-// autoplay suave
+// autoplay controlado
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting && !tocando) {
       musica.play().catch(() => {});
-      tocando = true;
     }
 
     if (!entry.isIntersecting && tocando) {
@@ -81,24 +103,7 @@ function formatarTempo(segundos) {
 
 
 // =========================
-// CONTADOR PADRÃO
-// =========================
-const dataInicio = new Date("2025-05-27T00:00:00");
-
-function atualizarContador() {
-  const agora = new Date();
-  let diff = agora - dataInicio;
-
-  document.getElementById("horasJuntos").innerText =
-    Math.floor(diff / (1000 * 60 * 60)).toLocaleString();
-}
-
-setInterval(atualizarContador, 1000);
-atualizarContador();
-
-
-// =========================
-// 🔥 ANIMAÇÃO DA CONEXÃO
+// CONEXÃO (ANIMAÇÃO)
 // =========================
 function animarNumero(elemento, valorFinal) {
   let atual = 0;
@@ -117,7 +122,7 @@ function animarNumero(elemento, valorFinal) {
 }
 
 function iniciarAnimacaoConexao() {
-  const inicio = new Date("2025-05-27T00:00:00");
+  const inicio = new Date("2025-05-27");
   const agora = new Date();
 
   const dias = Math.floor((agora - inicio) / (1000 * 60 * 60 * 24));
@@ -130,16 +135,11 @@ function iniciarAnimacaoConexao() {
   }
 }
 
-// ativa quando entra na tela 3
-const observerConexao = new IntersectionObserver((entries) => {
+new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      iniciarAnimacaoConexao();
-    }
+    if (entry.isIntersecting) iniciarAnimacaoConexao();
   });
-}, { threshold: 0.5 });
-
-observerConexao.observe(document.querySelector(".tela3"));
+}).observe(document.querySelector(".tela3"));
 
 
 // =========================
@@ -152,7 +152,7 @@ function toggleMensagem() {
 
 
 // =========================
-// STORIES
+// STORIES COMPLETO
 // =========================
 let storyIndex = 0;
 const stories = document.querySelectorAll(".story");
@@ -181,6 +181,8 @@ function mostrarStory(index) {
       const videoAtual = story.querySelector("video");
 
       if (videoAtual) {
+        videoAtual.muted = true;
+        videoAtual.playsInline = true;
         videoAtual.play();
 
         videoAtual.onloadedmetadata = () => {
@@ -214,7 +216,6 @@ function resetarTimer(tempo) {
   intervalo = setTimeout(proximoStory, tempo);
 }
 
-// clique
 document.querySelector(".tela5").addEventListener("click", (e) => {
   vibrar();
 
@@ -230,35 +231,34 @@ document.querySelector(".tela5").addEventListener("click", (e) => {
   if (storyIndex < 0) storyIndex = stories.length - 1;
 
   mostrarStory(storyIndex);
+  resetarTimer(tempoPadrao);
 });
 
 mostrarStory(0);
 
+
 // =========================
 // ANIMAÇÃO SUAVE
 // =========================
-const elementos = document.querySelectorAll(".card-inicio, .player-spotify, .card-conexao, .card-msg, .final");
-
-const animObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
+document.querySelectorAll(".card-inicio, .player-spotify, .card-conexao, .card-msg, .final")
+  .forEach(el => {
+    new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) el.classList.add("show");
+    }).observe(el);
   });
-}, { threshold: 0.2 });
-
-elementos.forEach(el => animObserver.observe(el));
 
 
 // =========================
 // VIBRAÇÃO
 // =========================
 function vibrar() {
-  if (navigator.vibrate) {
-    navigator.vibrate(10);
-  }
+  if (navigator.vibrate) navigator.vibrate(10);
 }
 
+
+// =========================
+// PARTÍCULAS
+// =========================
 function criarParticulas() {
   const tela = document.querySelector(".tela1");
 
