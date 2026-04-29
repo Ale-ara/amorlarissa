@@ -225,13 +225,15 @@ body {
 .story {
   position: absolute;
   inset: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   opacity: 0;
   transition: 0.5s;
-  background-size: cover;
-  background-position: center;
+
+  background: none !important; /* 🔥 ESSENCIAL */
 }
 
 .story.active {
