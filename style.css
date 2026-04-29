@@ -394,3 +394,8 @@ body {
 .btn-mensagem.ativo svg {
   transform: rotate(180deg);
 }
+
+.tela5 {
+  touch-action: manipulation;
+  user-select: none;
+}
