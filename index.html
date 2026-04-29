@@ -6,11 +6,22 @@
   <title>Para Larissa ❤️</title>
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- Preload da imagem principal -->
+  <link rel="preload" as="image" href="assets/foto.jpg">
 </head>
 
 <body>
 
+  <!-- 🎬 INTRO CINEMATOGRÁFICO -->
+  <div id="intro-overlay">
+    <div class="intro-text">Para Larissa ❤️</div>
+  </div>
+
+
+  <!-- ========================= -->
   <!-- TELA 1 -->
+  <!-- ========================= -->
   <section class="tela tela1">
     <div class="card-inicio">
       <h1>
@@ -19,99 +30,108 @@
       </h1>
 
       <p>
-        Um momento único feito com carinho<br>
-        para celebrar a nossa história ❤️
+        Um momento feito com todo o meu coração,<br>
+        pra lembrar o quanto você é especial pra mim ❤️
       </p>
 
       <button onclick="scrollParaMusica()">Ver Presente</button>
     </div>
   </section>
 
+
+  <!-- ========================= -->
   <!-- TELA 2 -->
- <section class="tela tela2">
-  <div class="player-spotify">
+  <!-- ========================= -->
+  <section class="tela tela2">
+    <div class="player-spotify">
 
-    <div class="header-player">
-      <span>Eu te amo mais que tudo! ❤️</span>
+      <div class="header-player">
+        <span>Eu te amo mais que tudo! ❤️</span>
+      </div>
+
+      <img src="assets/foto.jpg" class="capa-grande">
+
+      <div class="info-musica">
+        <h2>Sonha Comigo</h2>
+        <p>Zé Neto e Cristiano</p>
+      </div>
+
+      <audio id="musica" src="assets/musica.mp3"></audio>
+
+      <input type="range" id="progresso" value="0">
+
+      <div class="tempo">
+        <span id="inicio">0:00</span>
+        <span id="fim">0:00</span>
+      </div>
+
+      <div class="controles-player">
+
+        <!-- VOLTAR -->
+        <button onclick="reiniciarMusica()">
+          <svg viewBox="0 0 24 24">
+            <path fill="currentColor" d="M11 18V6l-8.5 6L11 18zm1 0h2V6h-2v12z"/>
+          </svg>
+        </button>
+
+        <!-- PLAY -->
+        <button class="play" onclick="toggleMusica()">
+          <svg id="iconPlay" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <!-- REPEAT -->
+        <button onclick="reiniciarMusica()">
+          <svg viewBox="0 0 24 24">
+            <path fill="currentColor" d="M17 1l4 4-4 4V6H7v4H5V4h12V1zM7 23l-4-4 4-4v3h10v-4h2v6H7v3z"/>
+          </svg>
+        </button>
+
+      </div>
+
     </div>
+  </section>
 
-    <img src="assets/foto.jpg" class="capa-grande">
 
-    <div class="info-musica">
-      <h2>Sonha Comigo</h2>
-      <p>Zé Neto e Cristiano</p>
-    </div>
-
-    <audio id="musica" src="assets/musica.mp3"></audio>
-
-    <input type="range" id="progresso" value="0">
-
-    <div class="tempo">
-      <span id="inicio">0:00</span>
-      <span id="fim">0:00</span>
-    </div>
-
-   <div class="controles-player">
-
-  <!-- VOLTAR -->
-  <button onclick="reiniciarMusica()">
-    <svg viewBox="0 0 24 24">
-      <path fill="currentColor" d="M11 18V6l-8.5 6L11 18zm1 0h2V6h-2v12z"/>
-    </svg>
-  </button>
-
-  <!-- PLAY / PAUSE -->
-  <button class="play" onclick="toggleMusica()" id="btnPlay">
-    <svg id="iconPlay" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M8 5v14l11-7z"/>
-    </svg>
-  </button>
-
-  <!-- REPEAT -->
-  <button onclick="reiniciarMusica()">
-    <svg viewBox="0 0 24 24">
-      <path fill="currentColor" d="M17 1l4 4-4 4V6H7v4H5V4h12V1zM7 23l-4-4 4-4v3h10v-4h2v6H7v3z"/>
-    </svg>
-  </button>
-
-</div>
-
-  </div>
-</section>
-
+  <!-- ========================= -->
   <!-- TELA 3 -->
+  <!-- ========================= -->
   <section class="tela tela3">
-  <div class="card-conexao">
+    <div class="card-conexao">
 
-    <div class="topo">
-      <span class="badge">Nosso amor ❤️</span>
+      <div class="topo">
+        <span class="badge">Nosso amor ❤️</span>
+      </div>
+
+      <img src="assets/foto2.jpg" class="foto-perfil">
+
+      <h2>Nossa Conexão</h2>
+      <p class="nomes">Alessandro & Larissa</p>
+
+      <div class="card-info">
+        <p>Nosso amor começou em Maio e já vive momentos inesquecíveis juntos 💖</p>
+      </div>
+
+      <div class="card-data">
+        <span>📅 Data especial</span>
+        <strong>27 de Maio</strong>
+      </div>
+
+      <div class="dias">
+        <h1 id="diasTotal">0</h1>
+        <span>dias juntos</span>
+      </div>
+
+      <p class="ranking">Nosso amor é único ❤️</p>
+
     </div>
+  </section>
 
-    <img src="assets/foto2.jpg" class="foto-perfil">
 
-    <h2>Nossa Conexão</h2>
-    <p class="nomes">Alessandro & Larissa</p>
-
-    <div class="card-info">
-      <p>Nosso amor começou em Maio e já vive momentos inesquecíveis juntos 💖</p>
-    </div>
-
-    <div class="card-data">
-      <span>📅 Data especial</span>
-      <strong>27 de Maio</strong>
-    </div>
-
-    <div class="dias">
-      <h1 id="diasTotal">0</h1>
-      <span>dias juntos</span>
-    </div>
-
-    <p class="ranking">Nosso amor é único ❤️</p>
-
-  </div>
-</section>
-
+  <!-- ========================= -->
   <!-- TELA 4 -->
+  <!-- ========================= -->
   <section class="tela tela4">
     <div class="card-msg">
 
@@ -132,49 +152,52 @@
     </div>
   </section>
 
+
+  <!-- ========================= -->
   <!-- TELA 5 -->
- <section class="tela tela5">
+  <!-- ========================= -->
+  <section class="tela tela5">
 
-  <div class="barra-topo">
-    <div class="barra"><span></span></div>
-    <div class="barra"><span></span></div>
-    <div class="barra"><span></span></div>
-    <div class="barra"><span></span></div>
-  </div>
-
-  <div class="stories">
-
-    <!-- FOTO -->
-    <div class="story active">
-      <img src="assets/story1.jpg" class="midia">
+    <div class="barra-topo">
+      <div class="barra"><span></span></div>
+      <div class="barra"><span></span></div>
+      <div class="barra"><span></span></div>
+      <div class="barra"><span></span></div>
     </div>
 
-    <!-- FOTO -->
-    <div class="story">
-      <img src="assets/story2.jpg" class="midia">
+    <div class="stories">
+
+      <div class="story active">
+        <img src="assets/story1.jpg" class="midia">
+      </div>
+
+      <div class="story">
+        <img src="assets/story2.jpg" class="midia">
+      </div>
+
+      <div class="story">
+        <video src="assets/video1.mp4" class="midia" muted playsinline></video>
+      </div>
+
+      <div class="story">
+        <img src="assets/story3.jpg" class="midia">
+      </div>
+
     </div>
 
-    <!-- VIDEO -->
-    <div class="story">
-      <video src="assets/video1.mp4" class="midia" muted playsinline></video>
-    </div>
+  </section>
 
-    <!-- FOTO -->
-    <div class="story">
-      <img src="assets/story3.jpg" class="midia">
-    </div>
 
-  </div>
-
-</section>
-
-  <!-- TELA FINAL -->
+  <!-- ========================= -->
+  <!-- FINAL -->
+  <!-- ========================= -->
   <section class="tela tela-final">
     <div class="final">
       <h1>Eu te amo ❤️</h1>
       <p>Para sempre nós.</p>
     </div>
   </section>
+
 
   <script src="script.js"></script>
 </body>
